@@ -84,7 +84,6 @@ const Login = () => {
       dispatch(uiActions.notif({ type: "danger", msg: "invalid password" }));
     } else {
       dispatch(uiActions.notif({ type: "", msg: "" }));
-      dispatch(sbActions.switch({ option: "dashboard" }));
       dispatch(uiActions.startLoad());
     }
   };
@@ -93,7 +92,7 @@ const Login = () => {
     if (notFirstTime && isPending) {
       axios
         .get(
-          `http://172.20.117.16:3001/v1/login?username=${data.username}&password=${data.password}`
+          `http://172.20.117.47:3001/v1/login?username=${data.username}&password=${data.password}`
         )
         .then(function (response) {
           // handle success
@@ -106,6 +105,9 @@ const Login = () => {
           );
           setCookie("token", response.data.accessToken);
           setCookie("role", response.data.userData.role);
+          if(response.data.userData.role === 'finance') dispatch(sbActions.switch({ option: "fa_dashboard" }));
+          else dispatch(sbActions.switch({ option: "dashboard" }));
+    
         })
         .catch(function (error) {
           dispatch(uiActions.stopLoad());
@@ -136,7 +138,10 @@ const Login = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      {token && <Navigate to="/home" replace />}
+      {token && userData.role != "finance" && <Navigate to="/home" replace />}
+      {token && userData.role === "finance" && (
+        <Navigate to="/fa_home" replace />
+      )}
       <Container
         component="main"
         maxWidth="xs"

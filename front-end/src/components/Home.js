@@ -191,5 +191,5 @@ const Home = () => {
 export default Home;
 /*
 TODO: make sidebar sticky
-FIXME: handle allData@home=empty array -> show error "nothing to show"
+FIXME: handle allData@home=empty array -> Pass empty error
 */

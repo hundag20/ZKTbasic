@@ -5,8 +5,14 @@ const bodyParser = require("body-parser");
 const auth = require("./controllers/auth.controller");
 const addUser = require("./controllers/addUser.controller");
 const viewAtts = require("./controllers/viewAtts.controller");
-const app = express();
+// const FixedPlantEquip = require("./models/fa_FixedPlantEquip.model");
+// const Vehicle = require("./models/fa_Vehicle.model");
+// const FixtureFitting = require("./models/fa_FixtureFitting.model");
+// const FreeStandEquip = require("./models/fa_FreeStandEquip.model");
+// const OfficeEquip = require("./models/fa_OfficeEquipAll.model");
+// const Pooling = require("./models/fa_Pooling0.model");
 
+const app = express();
 const getNewDate = async (x) => {
   const today = new Date();
 
@@ -54,6 +60,7 @@ app.get("/v1/today", cors(), async (req, res) => {
       data: todayAtts,
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).send({
       message: "something went wrong",
       error: err,
@@ -103,13 +110,18 @@ app.get("/v1/week", cors(), async (req, res) => {
       data: todayAtts,
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).send({
       message: "something went wrong",
       error: err,
     });
   }
 });
-http.createServer(app).listen(3001);
+
+http.createServer(app).listen(3001, (err) => {
+  if (err) console.log("err", err);
+  console.log("login back-end running on 3001");
+});
 module.exports = app;
 
 /*

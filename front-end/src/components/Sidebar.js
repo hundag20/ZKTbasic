@@ -1,8 +1,13 @@
 import StyledDiv from "./styles/sidebarStyle";
 import Logout from "./Logout";
+import { useSelector } from "react-redux";
 import logo from "../img/logo.png";
+import nologo from "../img/no-logo.PNG";
 
 const Sidebar = (props) => {
+  const userData = useSelector((state) => state.auth.userData);
+  const pic = userData.role === 'finance' ? nologo : logo;
+ 
   return (
     <StyledDiv>
       <section>
@@ -13,7 +18,7 @@ const Sidebar = (props) => {
                 <i className="fa"></i>
                 <img
                   style={{ height: "100px", width: "55px" }}
-                  src={logo}
+                  src={pic}
                   alt="Logo"
                 />
               </li>
