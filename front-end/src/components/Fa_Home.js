@@ -30,34 +30,82 @@ const Fa_Home = () => {
 
   const fa = {
     allHandler: async (event) => {
+      dispatch(
+        uiActions.notif({
+          type: "",
+          msg: "",
+        })
+      );
       effect.firstTime = false;
       dispatch(sbActions.switch({ option: "all" }));
     },
     fixedplantequipHandler: async (event) => {
+      dispatch(
+        uiActions.notif({
+          type: "",
+          msg: "",
+        })
+      );
       effect.firstTime = false;
       dispatch(sbActions.switch({ option: "fixedplantequip" }));
     },
     fixturefittingHandler: async (event) => {
+      dispatch(
+        uiActions.notif({
+          type: "",
+          msg: "",
+        })
+      );
       effect.firstTime = false;
       dispatch(sbActions.switch({ option: "fixturefitting" }));
     },
     freestandequipHandler: async (event) => {
+      dispatch(
+        uiActions.notif({
+          type: "",
+          msg: "",
+        })
+      );
       effect.firstTime = false;
       dispatch(sbActions.switch({ option: "freestandequip" }));
     },
     officeequipallHandler: async (event) => {
+      dispatch(
+        uiActions.notif({
+          type: "",
+          msg: "",
+        })
+      );
       effect.firstTime = false;
       dispatch(sbActions.switch({ option: "officeequipall" }));
     },
     poolingHandler: async (event) => {
+      dispatch(
+        uiActions.notif({
+          type: "",
+          msg: "",
+        })
+      );
       effect.firstTime = false;
       dispatch(sbActions.switch({ option: "pooling" }));
     },
     vehicleHandler: async (event) => {
+      dispatch(
+        uiActions.notif({
+          type: "",
+          msg: "",
+        })
+      );
       effect.firstTime = false;
       dispatch(sbActions.switch({ option: "vehicle" }));
     },
     compHardHanlder: async (event) => {
+      dispatch(
+        uiActions.notif({
+          type: "",
+          msg: "",
+        })
+      );
       effect.firstTime = false;
       dispatch(sbActions.switch({ option: "compHard" }));
     },
