@@ -16,7 +16,7 @@ const getNewDate = async (x) => {
 
   const newDate = today.getDate() - x;
   if (newDate <= 0) {
-    //TODO: decrementing 1/7 days from today...but when today's date is <1 / <7
+    //FIXME: //TODO: decrementing 1/7 days from today...but when today's date is <1 / <7
   } else {
     return {
       year: today.getFullYear(),
@@ -113,9 +113,9 @@ app.get("/v1/week", cors(), async (req, res) => {
   }
 });
 
-http.createServer(app).listen(3004, (err) => {
+http.createServer(app).listen(3002, (err) => {
   if (err) console.log("err", err);
-  console.log("Hr app running on 3004");
+  console.log("Hr app running on 3002");
 });
 module.exports = app;
 
