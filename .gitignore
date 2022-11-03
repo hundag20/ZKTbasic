@@ -4,7 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
-/env.env
+/.env.production
+/.env.development
+/combined.log
+/error.JSON
+/info.JSON
 # testing
 /coverage
 

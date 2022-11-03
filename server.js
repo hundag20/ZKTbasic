@@ -1,8 +1,10 @@
 var http = require("http");
 const express = require("express");
 const cors = require("cors");
+const fs = require("fs");
 const bodyParser = require("body-parser");
 const viewAtts = require("./controllers/viewAtts.controller");
+const logger = require("./controllers/logger");
 // const FixedPlantEquip = require("./models/fa_FixedPlantEquip.model");
 // const Vehicle = require("./models/fa_Vehicle.model");
 // const FixtureFitting = require("./models/fa_FixtureFitting.model");
@@ -55,7 +57,7 @@ app.get("/v1/today", cors(), async (req, res) => {
       data: todayAtts,
     });
   } catch (err) {
-    console.log(err);
+    logger("error", err);
     return res.status(500).send({
       message: "something went wrong",
       error: err,
@@ -105,7 +107,7 @@ app.get("/v1/week", cors(), async (req, res) => {
       data: todayAtts,
     });
   } catch (err) {
-    console.log(err);
+    logger("error", err);
     return res.status(500).send({
       message: "something went wrong",
       error: err,
@@ -113,9 +115,24 @@ app.get("/v1/week", cors(), async (req, res) => {
   }
 });
 
+app.get("/v1/logs", cors(), (req, res) => {
+  const content = fs.readFileSync(`./combined.log`, {
+    encoding: "utf8",
+    flag: "r",
+  });
+  res.send(content);
+});
+// app.get("/v1/env", cors(), (req, res) => {
+//   const content = fs.readFileSync(`./.env.production`, {
+//     encoding: "utf8",
+//     flag: "r",
+//   });
+//   res.send(content);
+// });
+
 http.createServer(app).listen(3002, (err) => {
-  if (err) console.log("err", err);
-  console.log("Hr app running on 3002");
+  if (err) logger("error", err);
+  else logger("info", "Hr app running on 3002");
 });
 module.exports = app;
 

@@ -4,7 +4,6 @@ const User = require("../models/User.model");
 const viewAtts = async (dateLower, dateHigher) => {
   dateHigher.setHours(dateHigher.getHours() + 3);
   dateLower.setHours(dateLower.getHours() + 3);
-  console.log(dateLower, dateHigher);
   const atts = await Att.query()
     .where("checktime", ">", dateLower)
     .where("checktime", "<", dateHigher)
