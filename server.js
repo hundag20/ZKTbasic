@@ -5,12 +5,9 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 const viewAtts = require("./controllers/viewAtts.controller");
 const logger = require("./controllers/logger");
-// const FixedPlantEquip = require("./models/fa_FixedPlantEquip.model");
-// const Vehicle = require("./models/fa_Vehicle.model");
-// const FixtureFitting = require("./models/fa_FixtureFitting.model");
-// const FreeStandEquip = require("./models/fa_FreeStandEquip.model");
-// const OfficeEquip = require("./models/fa_OfficeEquipAll.model");
-// const Pooling = require("./models/fa_Pooling0.model");
+const { verify } = require("./controllers/auth.controller");
+
+const _PORT = 3002;
 
 const app = express();
 const getNewDate = async (x) => {
@@ -42,7 +39,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, 'static')));
 
-app.get("/v1/today", cors(), async (req, res) => {
+app.post("/v1/today", verify, async (req, res) => {
   try {
     res.set("Access-Control-Allow-Origin", "*");
     const today = new Date();
@@ -64,7 +61,7 @@ app.get("/v1/today", cors(), async (req, res) => {
     });
   }
 });
-app.get("/v1/yest", cors(), async (req, res) => {
+app.post("/v1/yest", verify, async (req, res) => {
   try {
     res.set("Access-Control-Allow-Origin", "*");
     const today = new Date();
@@ -89,7 +86,7 @@ app.get("/v1/yest", cors(), async (req, res) => {
     });
   }
 });
-app.get("/v1/week", cors(), async (req, res) => {
+app.post("/v1/week", verify, async (req, res) => {
   try {
     res.set("Access-Control-Allow-Origin", "*");
     const today = new Date();
@@ -115,26 +112,25 @@ app.get("/v1/week", cors(), async (req, res) => {
   }
 });
 
-app.get("/v1/logs", cors(), (req, res) => {
+app.post("/v1/logs", (req, res) => {
   const content = fs.readFileSync(`./combined.log`, {
     encoding: "utf8",
     flag: "r",
   });
   res.send(content);
 });
-// app.get("/v1/env", cors(), (req, res) => {
+// app.post("/v1/env", (req, res) => {
 //   const content = fs.readFileSync(`./.env.production`, {
 //     encoding: "utf8",
 //     flag: "r",
 //   });
 //   res.send(content);
 // });
-
-http.createServer(app).listen(3002, (err) => {
+http.createServer(app).listen(_PORT, (err) => {
   if (err) logger("error", err);
-  else logger("info", "Hr app running on 3002");
+  else logger("info", `Hr app running on ${_PORT}`);
 });
-module.exports = app;
+module.exports = { app, _PORT };
 
 /*
 TODO: validate token on requests
