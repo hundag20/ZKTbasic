@@ -2,7 +2,7 @@ const axios = require("axios");
 const logger = require("./logger");
 
 const roleAllowed = (role) => {
-  if (role === "admin" || role === "finance") return true;
+  if (role === "admin" || role === "hr") return true;
   else return false;
 };
 
