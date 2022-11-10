@@ -16,7 +16,7 @@ exports.verify = async (req, res, next) => {
       });
     }
     //return select all rows
-    const url = `http://localhost:${_PORT - 1}/v1/verify`;
+    const url = `${process.env.MS_AUTH_URL}:${_PORT - 1}/v1/verify`;
     axios
       .post(url, {
         x_access_token: token,
